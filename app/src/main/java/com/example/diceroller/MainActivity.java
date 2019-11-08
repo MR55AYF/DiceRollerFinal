@@ -15,10 +15,11 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-
+    int counter = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,22 +69,56 @@ public class MainActivity extends AppCompatActivity {
 
         TextView congrat = this.findViewById(R.id.congrat);
         TextView userNum = this.findViewById(R.id.userNum);
-        int counter = 0;
+
         int n = Integer.parseInt(userNum.getText().toString());
 
         if (n < 1 || n > 6) {
             Toast.makeText(this, "Invalid Input Number", Toast.LENGTH_SHORT).show();
 
         } else if (n == number) {
-            counter++;
+
 
             Toast.makeText(this, "Congratulations, You guessed the number", Toast.LENGTH_SHORT).show();
-
+            this.counter++;
             TextView scoreCard = this.findViewById(R.id.userScore);
             scoreCard.setText("Your Score:" + counter);
         }
 
-    }}
+    }
+
+    public void on_click_button_2(View view) {
+
+        ArrayList<String> questions = new ArrayList<>();
+        {
+            questions.add("If you could go anywhere in the world, where would you go?");
+            questions.add("If you were stranded on a desert island, what three things would you want to take with you?");
+            questions.add("If you could eat only one food for the rest of your life, what would that be?");
+            questions.add("If you won a million dollars, what is the first thing you would buy?");
+            questions.add("If you could spaned the day with one fictional character, who would it be?");
+            questions.add("If you found a magic lantern and a genie gave you three wishes, what would you wish?");
+
+
+            TextView diceView = this.findViewById(R.id.randomElement);
+            Random rand = new Random();
+            int randomIndex = rand.nextInt(questions.size());
+
+
+            int numberOfElements = questions.size();
+
+            {
+                for (int i = 1; i <= numberOfElements; i++) {
+
+                    if (i == randomIndex) {
+                       String value = questions.get(randomIndex);
+                        diceView.setText(value);
+                    }
+
+                }
+            }
+        }
+    }
+}
+
 
 
 
